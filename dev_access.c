@@ -14,18 +14,37 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     if (strcmp(argv[1], "1")) {
-        int fd = open("/dev/input/mouse0", O_RDONLY);
+        // on my system, mouse0 does not do anything, but mouse2 does
+        // int fd = open("/dev/input/mouse0", O_RDONLY);
+        // if (fd < 0) {
+        //     perror("Could not open /dev/input/mouse0");
+        //     exit(EXIT_FAILURE);
+        // }
+        // unsigned char buf;
+        // ssize_t bytes_read;
+        
+        // while (1) {
+        //     bytes_read = read(fd, &buf, 1);
+        //     if (bytes_read < 0) {
+        //         perror("Could not read mouse0.");
+        //         exit(EXIT_FAILURE);
+        //     } else if (bytes_read == 0) {
+        //         break; // EOF
+        //     }
+        //     printf("%d\n", buf);
+        // }
+        int fd = open("/dev/input/mouse2", O_RDONLY);
         if (fd < 0) {
-            perror("Could not open /dev/input/mouse0");
+            perror("Could not open /dev/input/mouse2");
             exit(EXIT_FAILURE);
         }
         unsigned char buf;
         ssize_t bytes_read;
-
+        
         while (1) {
             bytes_read = read(fd, &buf, 1);
             if (bytes_read < 0) {
-                perror("Could not read mouse0.");
+                perror("Could not read mouse2.");
                 exit(EXIT_FAILURE);
             } else if (bytes_read == 0) {
                 break; // EOF
