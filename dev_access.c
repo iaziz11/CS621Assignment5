@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     if (strcmp(argv[1], "1")) {
+        printf("%s\n", argv[1]);
         // on my system, mouse0 does not do anything, but mouse2 does
         // int fd = open("/dev/input/mouse0", O_RDONLY);
         // if (fd < 0) {
