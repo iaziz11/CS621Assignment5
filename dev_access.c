@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         printf("Usage: ./dev_access [int]\n");
         return -1;
     }
-    if (strcmp(argv[1], "1") == 0) {
+    if (strcmp(argv[1], "0") == 0) {
         // on my system, mouse0 does not do anything, but mouse2 does
 
         // int fd = open("/dev/input/mouse0", O_RDONLY);
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
             }
             printf("%d\n", buf);
         }
-    } else if (strcmp(argv[1], "2") == 0) {
+    } else if (strcmp(argv[1], "1") == 0) {
         // open urandom
         int fd_in = open("/dev/urandom", O_RDONLY);
         if (fd_in < 0){
@@ -130,8 +130,35 @@ int main(int argc, char *argv[]) {
         free(buffer);
         close(fd_in);
         close(fd_out);
-    } else {
-        printf("Usage: ./dev_access [int]\nMake sure int is 1 or 0.\n");
+    } 
+    else if (strcmp(argv[1], "2") == 0) {
+        int fd = open("/dev/ticket0", O_RDONLY);
+        if (fd < 0) {
+            perror("Open ticket0 failed");
+            exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            int ticket;
+            ssize_t result = read(fd, &ticket, 4);
+            if (result < 0) {
+                perror("Can't read from ticket device");
+                close(fd);
+                exit(EXIT_FAILURE);
+            } else if (result != 4) {
+                fprintf(stderr, "Read returned %zd, expected 4\n", result);
+                close(fd);
+                exit(EXIT_FAILURE);
+            }
+
+            printf("Got ticket: %d\n", ticket);
+            sleep(1);
+        }
+
+        close(fd);
+    }
+    else {
+        printf("Usage: ./dev_access [int]\nMake sure int is 0, 1, or 2.\n");
         return -1;
     }
 
