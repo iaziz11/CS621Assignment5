@@ -10,8 +10,8 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        perror("Usage: ./dev_access [num]");
-        exit(EXIT_FAILURE);
+        printf("Usage: ./dev_access [int]");
+        return -1;
     }
     if (strcmp(argv[1], "1") == 0) {
         printf("%s\n", argv[1]);
@@ -119,8 +119,8 @@ int main(int argc, char *argv[]) {
         close(fd_in);
         close(fd_out);
     } else {
-        fprintf(stderr, "Usage: %s [1]\n", argv[0]);
-        return EXIT_FAILURE;
+        printf("Usage: ./dev_access [int]");
+        return -1;
     }
 
     return EXIT_SUCCESS;
