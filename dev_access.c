@@ -69,8 +69,8 @@ int main(int argc, char *argv[]) {
         }
 
         ssize_t total_written = 0;
-        while (total_written < TEN_MB) {
-            ssize_t n = write(fd_out, buffer + total_written, TEN_MB - total_written);
+        while (total_written < 10000000) {
+            ssize_t n = write(fd_out, buffer + total_written, 10000000 - total_written);
             if (n < 0) {
                 free(buffer);
                 close(fd_in);
@@ -101,4 +101,3 @@ int main(int argc, char *argv[]) {
 
     return EXIT_SUCCESS;
 }
->>>>>>> d200f77df03566bafae768b09aa0c8a23b136967
