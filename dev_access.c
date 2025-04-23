@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         perror("Usage: ./dev_access [num]");
         exit(EXIT_FAILURE);
     }
-    if (strcmp(argv[1], '1')) {
+    if (strcmp(argv[1], "1")) {
         int fd = open("/dev/input/mouse0", O_RDONLY);
         if (fd < 0) {
             perror("Could not open /dev/input/mouse0");
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
             }
             printf("%d\n", buf);
         }
-    } else if (strcmp(argv[1], '2')) {
+    } else if (strcmp(argv[1], "2")) {
         int fd_in = open("/dev/urandom", O_RDONLY);
         if (fd_in < 0){
             perror("Could not open urandom");
