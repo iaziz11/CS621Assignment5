@@ -248,7 +248,7 @@ ticket_init_module(void)
   ticket_major = MAJOR(dev);
 
   /* Create device class (before allocation of the array of devices) */
-  ticket_class = class_create(THIS_MODULE, TICKET_DEVICE_NAME);
+  ticket_class = class_create(TICKET_DEVICE_NAME);
   if (IS_ERR(ticket_class)) {
     err = PTR_ERR(ticket_class);
     goto fail;
