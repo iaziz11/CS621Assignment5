@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         perror("Usage: ./dev_access [num]");
         exit(EXIT_FAILURE);
     }
-    if (strcmp(argv[1], "1")) {
+    if (strcmp(argv[1], "1") == 0) {
         printf("%s\n", argv[1]);
         // on my system, mouse0 does not do anything, but mouse2 does
         // int fd = open("/dev/input/mouse0", O_RDONLY);
